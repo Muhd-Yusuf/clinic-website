@@ -13,15 +13,23 @@ export default function TestimonialCard({
 }: TestimonialCardProps) {
   return (
     <div
-      className="bg-white rounded-xl border p-6 flex flex-col gap-4"
-      style={{ borderColor: 'var(--color-border)' }}
+      className="bg-white rounded-2xl p-8 flex flex-col gap-4 shadow-sm hover:shadow-md transition-all duration-300"
     >
+      {/* Large opening quote */}
+      <div
+        className="text-6xl font-serif leading-none select-none"
+        style={{ color: 'var(--color-accent)', lineHeight: '0.8', marginBottom: '-8px' }}
+        aria-hidden="true"
+      >
+        &ldquo;
+      </div>
+
       {/* Stars */}
       <div className="flex gap-1">
         {Array.from({ length: 5 }).map((_, i) => (
           <svg
             key={i}
-            className="w-5 h-5"
+            className="w-4 h-4"
             viewBox="0 0 20 20"
             fill={i < rating ? 'var(--color-accent)' : 'var(--color-border)'}
           >
@@ -33,15 +41,15 @@ export default function TestimonialCard({
       {/* Quote text */}
       <p
         className="text-sm leading-relaxed flex-1 italic"
-        style={{ color: 'var(--color-text-secondary)' }}
+        style={{ color: 'var(--color-text-primary)' }}
       >
-        &ldquo;{text}&rdquo;
+        {text}
       </p>
 
-      {/* Name + treatment */}
-      <div className="flex items-center justify-between flex-wrap gap-2">
+      {/* Name + treatment badge */}
+      <div className="flex items-center justify-between flex-wrap gap-2 pt-2 border-t" style={{ borderColor: 'var(--color-border)' }}>
         <span
-          className="font-semibold text-sm"
+          className="font-bold text-sm"
           style={{ color: 'var(--color-text-primary)' }}
         >
           {name}

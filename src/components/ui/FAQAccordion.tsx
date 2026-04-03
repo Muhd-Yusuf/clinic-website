@@ -20,19 +20,23 @@ export default function FAQAccordion({ items }: FAQAccordionProps) {
   };
 
   return (
-    <div className="divide-y" style={{ borderColor: 'var(--color-border)' }}>
+    <div className="space-y-0">
       {items.map((item, index) => {
         const isOpen = openIndex === index;
         return (
-          <div key={index} className="py-4">
+          <div
+            key={index}
+            className="border-b py-5"
+            style={{ borderColor: 'var(--color-border)' }}
+          >
             <button
-              className="w-full flex items-center justify-between gap-4 text-start"
+              className="w-full flex items-center justify-between gap-4 text-start cursor-pointer"
               onClick={() => toggle(index)}
               aria-expanded={isOpen}
             >
               <span
-                className="font-semibold text-base"
-                style={{ color: 'var(--color-text-primary)' }}
+                className="font-medium text-base leading-snug transition-colors duration-200"
+                style={{ color: isOpen ? 'var(--color-accent)' : 'var(--color-text-primary)' }}
               >
                 {item.question}
               </span>
@@ -57,7 +61,7 @@ export default function FAQAccordion({ items }: FAQAccordionProps) {
               }}
             >
               <p
-                className="pt-3 pb-1 text-sm leading-relaxed"
+                className="pt-4 pb-1 text-sm leading-relaxed"
                 style={{ color: 'var(--color-text-secondary)' }}
               >
                 {item.answer}

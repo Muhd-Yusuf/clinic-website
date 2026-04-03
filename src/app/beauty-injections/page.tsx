@@ -41,19 +41,26 @@ function BeautyInjectionsContent() {
         title={bi.heroTitle}
         subtitle={bi.heroSubtitle}
         bgColor="secondary"
+        cta={{ text: t.common.bookBtn, href: buildHref('/contact') }}
       />
 
-      {/* Treatments Grid Overview */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-white)' }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+      {/* Treatments overview — white */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-white)' }}>
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-14">
+            <span
+              className="inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4"
+              style={{ color: 'var(--color-accent)' }}
+            >
+              {isRu ? 'Все процедуры' : 'כל הטיפולים'}
+            </span>
             <h2
-              className="text-2xl sm:text-3xl font-bold"
-              style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)' }}
+              className="text-3xl sm:text-4xl font-bold"
+              style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)', lineHeight: '1.1' }}
             >
               {bi.treatmentsTitle}
             </h2>
-            <p className="mt-3 text-base" style={{ color: 'var(--color-text-secondary)' }}>
+            <p className="mt-4 text-base max-w-xl mx-auto" style={{ color: 'var(--color-text-secondary)' }}>
               {bi.treatmentsSubtitle}
             </p>
           </div>
@@ -61,10 +68,10 @@ function BeautyInjectionsContent() {
             {treatments.map((tr) => (
               <div
                 key={tr.title}
-                className="p-4 rounded-xl border text-center cursor-pointer transition-shadow hover:shadow-md"
-                style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-bg)' }}
+                className="card-hover p-5 rounded-2xl text-center"
+                style={{ backgroundColor: 'var(--color-bg)' }}
               >
-                <span className="flex justify-center mb-2" style={{ color: 'var(--color-accent)' }}>{tr.icon}</span>
+                <span className="flex justify-center mb-3" style={{ color: 'var(--color-accent)' }}>{tr.icon}</span>
                 <p
                   className="text-sm font-semibold"
                   style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)' }}
@@ -77,16 +84,15 @@ function BeautyInjectionsContent() {
         </div>
       </section>
 
-      {/* Detailed blocks for each treatment */}
+      {/* Detailed treatment blocks — alternating */}
       {treatments.map((tr, idx) => (
         <section
           key={tr.title}
-          className="py-16 px-4 sm:px-6 lg:px-8"
+          className="py-24 px-4 sm:px-6 lg:px-8"
           style={{ backgroundColor: idx % 2 === 0 ? 'var(--color-secondary-bg)' : 'var(--color-white)' }}
         >
-          <div className="max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              {/* Image placeholder (alternating sides) */}
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               {idx % 2 === 0 ? (
                 <>
                   <div>
@@ -99,12 +105,12 @@ function BeautyInjectionsContent() {
                         {tr.title}
                       </h2>
                     </div>
-                    <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--color-text-secondary)' }}>
+                    <p className="text-base leading-relaxed mb-7" style={{ color: 'var(--color-text-secondary)' }}>
                       {tr.desc}
                     </p>
-                    <ul className="space-y-2">
+                    <ul className="space-y-3">
                       {tr.benefits.map((b) => (
-                        <li key={b} className="flex items-center gap-2">
+                        <li key={b} className="flex items-center gap-3">
                           <CheckCircleIcon className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-accent)' }} />
                           <span className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>{b}</span>
                         </li>
@@ -112,19 +118,28 @@ function BeautyInjectionsContent() {
                     </ul>
                   </div>
                   <div
-                    className="h-64 rounded-2xl flex items-center justify-center"
-                    style={{ backgroundColor: 'var(--color-accent-light)', color: 'var(--color-accent-dark)' }}
+                    className="rounded-2xl flex items-center justify-center"
+                    style={{
+                      aspectRatio: '4/3',
+                      backgroundColor: 'var(--color-accent-light)',
+                      opacity: 0.7,
+                      color: 'var(--color-accent-dark)',
+                    }}
                   >
-                    <span className="w-20 h-20">{tr.icon}</span>
+                    <span className="w-20 h-20 flex items-center justify-center" style={{ color: 'var(--color-accent-dark)', opacity: 0.6 }}>{tr.icon}</span>
                   </div>
                 </>
               ) : (
                 <>
                   <div
-                    className="h-64 rounded-2xl flex items-center justify-center"
-                    style={{ backgroundColor: 'var(--color-accent-light)', color: 'var(--color-accent-dark)' }}
+                    className="rounded-2xl flex items-center justify-center"
+                    style={{
+                      aspectRatio: '4/3',
+                      backgroundColor: 'var(--color-secondary-bg)',
+                      border: '1px solid var(--color-border)',
+                    }}
                   >
-                    <span className="w-20 h-20">{tr.icon}</span>
+                    <span className="w-20 h-20 flex items-center justify-center" style={{ color: 'var(--color-accent-light)' }}>{tr.icon}</span>
                   </div>
                   <div>
                     <div className="flex items-center gap-3 mb-4">
@@ -136,12 +151,12 @@ function BeautyInjectionsContent() {
                         {tr.title}
                       </h2>
                     </div>
-                    <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--color-text-secondary)' }}>
+                    <p className="text-base leading-relaxed mb-7" style={{ color: 'var(--color-text-secondary)' }}>
                       {tr.desc}
                     </p>
-                    <ul className="space-y-2">
+                    <ul className="space-y-3">
                       {tr.benefits.map((b) => (
-                        <li key={b} className="flex items-center gap-2">
+                        <li key={b} className="flex items-center gap-3">
                           <CheckCircleIcon className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-accent)' }} />
                           <span className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>{b}</span>
                         </li>
@@ -155,50 +170,57 @@ function BeautyInjectionsContent() {
         </section>
       ))}
 
-      {/* Natural Results Philosophy */}
+      {/* Philosophy — secondary-bg */}
       <section
-        className="py-16 px-4 sm:px-6 lg:px-8 text-center"
+        className="py-24 px-4 sm:px-6 lg:px-8 text-center"
         style={{ backgroundColor: 'var(--color-secondary-bg)' }}
       >
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-2xl mx-auto">
           <span
-            className="text-xs font-semibold uppercase tracking-widest"
+            className="inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4"
             style={{ color: 'var(--color-accent)' }}
           >
             {bi.philosophySubtitle}
           </span>
           <h2
-            className="text-2xl sm:text-3xl font-bold mt-2 mb-6"
-            style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)' }}
+            className="text-3xl sm:text-4xl font-bold mb-6"
+            style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)', lineHeight: '1.1' }}
           >
             {bi.philosophyTitle}
           </h2>
+          <span className="section-divider mb-6 block" />
           <p className="text-base leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
             {bi.philosophyText}
           </p>
         </div>
       </section>
 
-      {/* Safety section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-white)' }}>
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-10">
+      {/* Safety — white */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-white)' }}>
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <span
+              className="inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4"
+              style={{ color: 'var(--color-accent)' }}
+            >
+              {isRu ? 'Безопасность' : 'בטיחות'}
+            </span>
             <h2
-              className="text-2xl sm:text-3xl font-bold"
-              style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)' }}
+              className="text-3xl sm:text-4xl font-bold"
+              style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)', lineHeight: '1.1' }}
             >
               {bi.safetyTitle}
             </h2>
-            <p className="mt-2 text-base" style={{ color: 'var(--color-text-secondary)' }}>{bi.safetySubtitle}</p>
+            <p className="mt-4 text-base" style={{ color: 'var(--color-text-secondary)' }}>{bi.safetySubtitle}</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {[bi.safety1, bi.safety2, bi.safety3, bi.safety4].map((s) => (
               <div
                 key={s}
-                className="flex items-start gap-4 p-5 rounded-xl border"
-                style={{ borderColor: 'var(--color-border)' }}
+                className="flex items-start gap-4 p-6 rounded-2xl"
+                style={{ backgroundColor: 'var(--color-bg)' }}
               >
-                <CheckCircleIcon className="w-6 h-6 flex-shrink-0 mt-0.5" style={{ color: 'var(--color-accent)' }} />
+                <CheckCircleIcon className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--color-accent)' }} />
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>{s}</p>
               </div>
             ))}
@@ -206,15 +228,23 @@ function BeautyInjectionsContent() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-secondary-bg)' }}>
-        <div className="max-w-4xl mx-auto">
-          <h2
-            className="text-2xl sm:text-3xl font-bold mb-8"
-            style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)' }}
-          >
-            {bi.faqTitle}
-          </h2>
+      {/* FAQ — secondary-bg */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-secondary-bg)' }}>
+        <div className="max-w-2xl mx-auto">
+          <div className="text-center mb-12">
+            <span
+              className="inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4"
+              style={{ color: 'var(--color-accent)' }}
+            >
+              {isRu ? 'Ответы на вопросы' : 'שאלות ותשובות'}
+            </span>
+            <h2
+              className="text-3xl sm:text-4xl font-bold"
+              style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)', lineHeight: '1.1' }}
+            >
+              {bi.faqTitle}
+            </h2>
+          </div>
           <FAQAccordion items={bi.faqItems} />
         </div>
       </section>

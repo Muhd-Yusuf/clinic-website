@@ -16,12 +16,12 @@ function VeinTreatmentsContent() {
   const buildHref = (path: string) => (isRu ? `${path}?lang=ru` : path);
 
   const symptoms = [
-    { icon: <SyringeIcon className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-accent)' }} />, text: vt.symptom1 },
-    { icon: <SyringeIcon className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-accent)' }} />, text: vt.symptom2 },
-    { icon: <CheckCircleIcon className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-accent)' }} />, text: vt.symptom3 },
-    { icon: <CheckCircleIcon className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-accent)' }} />, text: vt.symptom4 },
-    { icon: <CheckCircleIcon className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-accent)' }} />, text: vt.symptom5 },
-    { icon: <CheckCircleIcon className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-accent)' }} />, text: vt.symptom6 },
+    { icon: <SyringeIcon className="w-5 h-5 flex-shrink-0" />, text: vt.symptom1 },
+    { icon: <SyringeIcon className="w-5 h-5 flex-shrink-0" />, text: vt.symptom2 },
+    { icon: <CheckCircleIcon className="w-5 h-5 flex-shrink-0" />, text: vt.symptom3 },
+    { icon: <CheckCircleIcon className="w-5 h-5 flex-shrink-0" />, text: vt.symptom4 },
+    { icon: <CheckCircleIcon className="w-5 h-5 flex-shrink-0" />, text: vt.symptom5 },
+    { icon: <CheckCircleIcon className="w-5 h-5 flex-shrink-0" />, text: vt.symptom6 },
   ];
 
   return (
@@ -31,19 +31,26 @@ function VeinTreatmentsContent() {
         title={vt.heroTitle}
         subtitle={vt.heroSubtitle}
         bgColor="secondary"
+        cta={{ text: t.common.bookBtn, href: buildHref('/contact') }}
       />
 
-      {/* Symptoms */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-white)' }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+      {/* Symptoms — white band */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-white)' }}>
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-14">
+            <span
+              className="inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4"
+              style={{ color: 'var(--color-accent)' }}
+            >
+              {isRu ? 'Когда обратиться' : 'מתי לפנות לטיפול'}
+            </span>
             <h2
-              className="text-2xl sm:text-3xl font-bold"
-              style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)' }}
+              className="text-3xl sm:text-4xl font-bold"
+              style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)', lineHeight: '1.1' }}
             >
               {vt.symptomsTitle}
             </h2>
-            <p className="mt-3 text-base" style={{ color: 'var(--color-text-secondary)' }}>
+            <p className="mt-4 text-base max-w-xl mx-auto" style={{ color: 'var(--color-text-secondary)' }}>
               {vt.symptomsSubtitle}
             </p>
           </div>
@@ -51,10 +58,10 @@ function VeinTreatmentsContent() {
             {symptoms.map((s) => (
               <div
                 key={s.text}
-                className="flex items-start gap-4 p-5 rounded-xl border"
-                style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-bg)' }}
+                className="flex items-start gap-4 p-6 rounded-2xl"
+                style={{ backgroundColor: 'var(--color-bg)' }}
               >
-                <span className="mt-0.5">{s.icon}</span>
+                <span className="mt-0.5 flex-shrink-0" style={{ color: 'var(--color-accent)' }}>{s.icon}</span>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
                   {s.text}
                 </p>
@@ -64,26 +71,31 @@ function VeinTreatmentsContent() {
         </div>
       </section>
 
-      {/* Sclerotherapy */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-secondary-bg)' }}>
-        <div className="max-w-4xl mx-auto">
-          <h2
-            className="text-2xl sm:text-3xl font-bold mb-6"
-            style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)' }}
-          >
-            {vt.sclerotherapyTitle}
-          </h2>
-          <p className="text-base leading-relaxed mb-8" style={{ color: 'var(--color-text-secondary)' }}>
-            {vt.sclerotherapyDesc}
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div
-              className="p-6 rounded-xl"
-              style={{ backgroundColor: 'var(--color-white)', border: '1px solid var(--color-border)' }}
+      {/* Sclerotherapy — secondary-bg band */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-secondary-bg)' }}>
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-10">
+            <span
+              className="inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4"
+              style={{ color: 'var(--color-accent)' }}
             >
+              {isRu ? 'Основной метод' : 'שיטת הטיפול העיקרית'}
+            </span>
+            <h2
+              className="text-3xl sm:text-4xl font-bold mb-5"
+              style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)', lineHeight: '1.1' }}
+            >
+              {vt.sclerotherapyTitle}
+            </h2>
+            <p className="text-base leading-relaxed max-w-2xl" style={{ color: 'var(--color-text-secondary)' }}>
+              {vt.sclerotherapyDesc}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-8 rounded-2xl bg-white shadow-sm">
               <h3
-                className="text-lg font-bold mb-3"
+                className="text-xl font-bold mb-4"
                 style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)' }}
               >
                 {vt.sclerotherapyHowTitle}
@@ -92,12 +104,9 @@ function VeinTreatmentsContent() {
                 {vt.sclerotherapyHow}
               </p>
             </div>
-            <div
-              className="p-6 rounded-xl"
-              style={{ backgroundColor: 'var(--color-white)', border: '1px solid var(--color-border)' }}
-            >
+            <div className="p-8 rounded-2xl bg-white shadow-sm">
               <h3
-                className="text-lg font-bold mb-3"
+                className="text-xl font-bold mb-4"
                 style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)' }}
               >
                 {vt.sclerotherapyResultsTitle}
@@ -110,28 +119,38 @@ function VeinTreatmentsContent() {
         </div>
       </section>
 
-      {/* Laser vessel removal */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-white)' }}>
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* placeholder image */}
+      {/* Laser vessel removal — white band */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-white)' }}>
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Image placeholder — rounded-2xl */}
             <div
-              className="h-64 rounded-2xl flex items-center justify-center"
-              style={{ backgroundColor: 'var(--color-accent-light)' }}
+              className="rounded-2xl flex items-center justify-center"
+              style={{
+                aspectRatio: '4/3',
+                backgroundColor: 'var(--color-secondary-bg)',
+                border: '1px solid var(--color-border)',
+              }}
             >
-              <SparkleIcon className="w-16 h-16" style={{ color: 'var(--color-accent-dark)' }} />
+              <SparkleIcon className="w-16 h-16" style={{ color: 'var(--color-accent-light)' }} />
             </div>
             <div>
+              <span
+                className="inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4"
+                style={{ color: 'var(--color-accent)' }}
+              >
+                {isRu ? 'Лазерный метод' : 'לייזר לוריד'}
+              </span>
               <h2
-                className="text-2xl sm:text-3xl font-bold mb-4"
-                style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)' }}
+                className="text-3xl sm:text-4xl font-bold mb-5"
+                style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)', lineHeight: '1.1' }}
               >
                 {vt.laserVesselTitle}
               </h2>
-              <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--color-text-secondary)' }}>
+              <p className="text-base leading-relaxed mb-7" style={{ color: 'var(--color-text-secondary)' }}>
                 {vt.laserVesselDesc}
               </p>
-              <ul className="space-y-3">
+              <ul className="space-y-4">
                 {[vt.laserVesselBenefit1, vt.laserVesselBenefit2, vt.laserVesselBenefit3].map((b) => (
                   <li key={b} className="flex items-start gap-3">
                     <CheckCircleIcon className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--color-accent)' }} />
@@ -144,36 +163,54 @@ function VeinTreatmentsContent() {
         </div>
       </section>
 
-      {/* Candidates */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-secondary-bg)' }}>
-        <div className="max-w-4xl mx-auto">
-          <h2
-            className="text-2xl sm:text-3xl font-bold mb-4"
-            style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)' }}
-          >
-            {vt.candidateTitle}
-          </h2>
-          <p className="text-base mb-6" style={{ color: 'var(--color-text-secondary)' }}>{vt.candidateDesc}</p>
-          <ul className="space-y-3">
+      {/* Candidates — secondary-bg band */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-secondary-bg)' }}>
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-8">
+            <span
+              className="inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4"
+              style={{ color: 'var(--color-accent)' }}
+            >
+              {isRu ? 'Показания' : 'מי מתאים לטיפול'}
+            </span>
+            <h2
+              className="text-3xl sm:text-4xl font-bold mb-4"
+              style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)', lineHeight: '1.1' }}
+            >
+              {vt.candidateTitle}
+            </h2>
+            <p className="text-base mb-7 max-w-2xl" style={{ color: 'var(--color-text-secondary)' }}>
+              {vt.candidateDesc}
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[vt.candidate1, vt.candidate2, vt.candidate3, vt.candidate4].map((c) => (
-              <li key={c} className="flex items-start gap-3">
+              <div key={c} className="flex items-start gap-3 bg-white rounded-2xl p-5 shadow-sm">
                 <CheckCircleIcon className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--color-accent)' }} />
                 <span className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>{c}</span>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-white)' }}>
-        <div className="max-w-4xl mx-auto">
-          <h2
-            className="text-2xl sm:text-3xl font-bold mb-8"
-            style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)' }}
-          >
-            {vt.faqTitle}
-          </h2>
+      {/* FAQ — white bg */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-white)' }}>
+        <div className="max-w-2xl mx-auto">
+          <div className="text-center mb-12">
+            <span
+              className="inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4"
+              style={{ color: 'var(--color-accent)' }}
+            >
+              {isRu ? 'Ответы на вопросы' : 'שאלות ותשובות'}
+            </span>
+            <h2
+              className="text-3xl sm:text-4xl font-bold"
+              style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)', lineHeight: '1.1' }}
+            >
+              {vt.faqTitle}
+            </h2>
+          </div>
           <FAQAccordion items={vt.faqItems} />
         </div>
       </section>

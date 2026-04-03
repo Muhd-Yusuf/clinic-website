@@ -17,18 +17,22 @@ export default function CTABlock({
 }: CTABlockProps) {
   return (
     <section
-      className="py-16 px-4 sm:px-6 lg:px-8 text-center"
-      style={{ backgroundColor: 'var(--color-accent)' }}
+      className="relative py-24 px-4 sm:px-6 lg:px-8 text-center overflow-hidden"
+      style={{
+        background: 'radial-gradient(ellipse at 60% 50%, #CF9095 0%, var(--color-accent) 55%, var(--color-accent-dark) 100%)',
+      }}
     >
-      <div className="max-w-3xl mx-auto">
+      <div className="relative z-10 max-w-3xl mx-auto">
         <h2
-          className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4"
-          style={{ fontFamily: 'var(--font-playfair)' }}
+          className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5"
+          style={{ fontFamily: 'var(--font-playfair)', lineHeight: '1.15' }}
         >
           {title}
         </h2>
         {subtitle && (
-          <p className="text-white/85 text-base sm:text-lg mb-8">{subtitle}</p>
+          <p className="mb-10 text-base sm:text-lg max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.85)' }}>
+            {subtitle}
+          </p>
         )}
 
         {(primaryBtn || secondaryBtn) && (
@@ -36,7 +40,7 @@ export default function CTABlock({
             {primaryBtn && (
               <Link
                 href={primaryBtn.href}
-                className="px-6 py-3 rounded-lg font-semibold text-sm sm:text-base transition-opacity hover:opacity-90"
+                className="px-8 py-3.5 rounded-full font-semibold text-sm sm:text-base transition-all hover:shadow-lg hover:scale-105"
                 style={{
                   backgroundColor: 'var(--color-white)',
                   color: 'var(--color-accent-dark)',
@@ -48,7 +52,7 @@ export default function CTABlock({
             {secondaryBtn && (
               <Link
                 href={secondaryBtn.href}
-                className="px-6 py-3 rounded-lg font-semibold text-sm sm:text-base border-2 border-white text-white transition-colors hover:bg-white/10"
+                className="px-8 py-3.5 rounded-full font-semibold text-sm sm:text-base border border-white text-white transition-all hover:bg-white/15"
               >
                 {secondaryBtn.text}
               </Link>
@@ -59,7 +63,7 @@ export default function CTABlock({
         {phone && (
           <a
             href={`tel:${phone.replace(/[^+\d]/g, '')}`}
-            className="text-white/90 text-sm font-medium hover:text-white transition-colors"
+            className="text-white/80 text-sm font-medium hover:text-white transition-colors tracking-wide"
           >
             {phone}
           </a>

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
+import { ArrowRightIcon } from '@/components/ui/Icons';
 
 interface ServiceCardProps {
   icon: React.ReactNode;
@@ -18,15 +19,20 @@ export default function ServiceCard({
 }: ServiceCardProps) {
   return (
     <div
-      className="bg-white rounded-xl border p-6 flex flex-col gap-4 transition-shadow duration-200 hover:shadow-lg"
-      style={{ borderColor: 'var(--color-border)' }}
+      className="card-hover bg-white rounded-2xl p-8 flex flex-col gap-5 shadow-sm hover:shadow-lg"
     >
       {/* Icon circle */}
       <div
-        className="w-14 h-14 rounded-full flex items-center justify-center"
-        style={{ backgroundColor: 'var(--color-accent-light)' }}
+        className="w-15 h-15 rounded-full flex items-center justify-center flex-shrink-0"
+        style={{
+          width: '60px',
+          height: '60px',
+          backgroundColor: 'var(--color-secondary-bg)',
+        }}
       >
-        <span className="w-7 h-7" style={{ color: 'var(--color-accent-dark)' }}>
+        <span
+          style={{ color: 'var(--color-accent-dark)', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '28px', height: '28px' }}
+        >
           {icon}
         </span>
       </div>
@@ -50,14 +56,19 @@ export default function ServiceCard({
         {description}
       </p>
 
-      {/* Learn more link */}
-      <Link
-        href={href}
-        className="text-sm font-semibold transition-colors hover:underline"
-        style={{ color: 'var(--color-accent)' }}
-      >
-        {learnMoreLabel}
-      </Link>
+      {/* Learn more — pill link at bottom */}
+      <div className="flex items-center justify-between mt-2">
+        <Link
+          href={href}
+          className="text-sm font-semibold transition-colors hover:underline"
+          style={{ color: 'var(--color-accent)' }}
+        >
+          {learnMoreLabel}
+        </Link>
+        <span style={{ color: 'var(--color-accent-light)' }}>
+          <ArrowRightIcon className="w-4 h-4" />
+        </span>
+      </div>
     </div>
   );
 }

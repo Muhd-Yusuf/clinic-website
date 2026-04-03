@@ -50,7 +50,7 @@ export default async function RootLayout({
         <Suspense fallback={null}>
           <HtmlDirSetter />
         </Suspense>
-        <Suspense fallback={<div className="h-16 bg-white border-b" style={{ borderColor: 'var(--color-border)' }} />}>
+        <Suspense fallback={<div className="h-20 bg-white border-b" style={{ borderColor: 'var(--color-border)' }} />}>
           <Nav />
         </Suspense>
         <main className="flex-1">{children}</main>

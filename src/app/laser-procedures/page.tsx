@@ -50,19 +50,26 @@ function LaserProceduresContent() {
         title={lp.heroTitle}
         subtitle={lp.heroSubtitle}
         bgColor="secondary"
+        cta={{ text: t.common.bookBtn, href: buildHref('/contact') }}
       />
 
-      {/* Skin Concerns Grid */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-white)' }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+      {/* Skin concerns — white */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-white)' }}>
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-14">
+            <span
+              className="inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4"
+              style={{ color: 'var(--color-accent)' }}
+            >
+              {isRu ? 'Показания' : 'בעיות שאנחנו מטפלים'}
+            </span>
             <h2
-              className="text-2xl sm:text-3xl font-bold"
-              style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)' }}
+              className="text-3xl sm:text-4xl font-bold"
+              style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)', lineHeight: '1.1' }}
             >
               {lp.concernsTitle}
             </h2>
-            <p className="mt-3 text-base" style={{ color: 'var(--color-text-secondary)' }}>
+            <p className="mt-4 text-base max-w-xl mx-auto" style={{ color: 'var(--color-text-secondary)' }}>
               {lp.concernsSubtitle}
             </p>
           </div>
@@ -70,14 +77,11 @@ function LaserProceduresContent() {
             {concerns.map((c) => (
               <div
                 key={c.text}
-                className="flex flex-col items-center p-4 rounded-xl border text-center"
-                style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-bg)' }}
+                className="card-hover flex flex-col items-center p-5 rounded-2xl text-center"
+                style={{ backgroundColor: 'var(--color-bg)' }}
               >
-                <span className="mb-2" style={{ color: 'var(--color-accent)' }}>{c.icon}</span>
-                <p
-                  className="text-xs font-semibold"
-                  style={{ color: 'var(--color-text-primary)' }}
-                >
+                <span className="mb-3" style={{ color: 'var(--color-accent)' }}>{c.icon}</span>
+                <p className="text-xs font-semibold" style={{ color: 'var(--color-text-primary)' }}>
                   {c.text}
                 </p>
               </div>
@@ -86,15 +90,15 @@ function LaserProceduresContent() {
         </div>
       </section>
 
-      {/* Treatment Blocks */}
+      {/* Treatment blocks — alternating */}
       {treatmentBlocks.map((block, idx) => (
         <section
           key={block.title}
-          className="py-16 px-4 sm:px-6 lg:px-8"
+          className="py-24 px-4 sm:px-6 lg:px-8"
           style={{ backgroundColor: idx % 2 === 0 ? 'var(--color-secondary-bg)' : 'var(--color-white)' }}
         >
-          <div className="max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               {idx % 2 === 0 ? (
                 <>
                   <div>
@@ -107,33 +111,41 @@ function LaserProceduresContent() {
                         {block.title}
                       </h2>
                     </div>
-                    <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--color-text-secondary)' }}>
+                    <p className="text-base leading-relaxed mb-7" style={{ color: 'var(--color-text-secondary)' }}>
                       {block.desc}
                     </p>
                     <div
-                      className="flex items-center gap-3 p-4 rounded-lg"
-                      style={{ backgroundColor: 'var(--color-accent-light)' }}
+                      className="flex items-start gap-3 p-5 rounded-2xl"
+                      style={{ backgroundColor: 'var(--color-white)' }}
                     >
-                      <StarIcon className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-accent-dark)' }} />
+                      <StarIcon className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--color-accent)' }} />
                       <p className="text-sm font-medium" style={{ color: 'var(--color-accent-dark)' }}>
                         {block.results}
                       </p>
                     </div>
                   </div>
                   <div
-                    className="h-64 rounded-2xl flex items-center justify-center"
-                    style={{ backgroundColor: 'var(--color-accent-light)', color: 'var(--color-accent-dark)' }}
+                    className="rounded-2xl flex items-center justify-center"
+                    style={{
+                      aspectRatio: '4/3',
+                      backgroundColor: 'var(--color-accent-light)',
+                      opacity: 0.65,
+                    }}
                   >
-                    <span className="w-20 h-20">{block.icon}</span>
+                    <span className="w-16 h-16 flex items-center justify-center" style={{ color: 'var(--color-accent-dark)', opacity: 0.7 }}>{block.icon}</span>
                   </div>
                 </>
               ) : (
                 <>
                   <div
-                    className="h-64 rounded-2xl flex items-center justify-center"
-                    style={{ backgroundColor: 'var(--color-accent-light)', color: 'var(--color-accent-dark)' }}
+                    className="rounded-2xl flex items-center justify-center"
+                    style={{
+                      aspectRatio: '4/3',
+                      backgroundColor: 'var(--color-secondary-bg)',
+                      border: '1px solid var(--color-border)',
+                    }}
                   >
-                    <span className="w-20 h-20">{block.icon}</span>
+                    <span className="w-16 h-16 flex items-center justify-center" style={{ color: 'var(--color-accent-light)' }}>{block.icon}</span>
                   </div>
                   <div>
                     <div className="flex items-center gap-3 mb-4">
@@ -145,14 +157,14 @@ function LaserProceduresContent() {
                         {block.title}
                       </h2>
                     </div>
-                    <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--color-text-secondary)' }}>
+                    <p className="text-base leading-relaxed mb-7" style={{ color: 'var(--color-text-secondary)' }}>
                       {block.desc}
                     </p>
                     <div
-                      className="flex items-center gap-3 p-4 rounded-lg"
-                      style={{ backgroundColor: 'var(--color-accent-light)' }}
+                      className="flex items-start gap-3 p-5 rounded-2xl"
+                      style={{ backgroundColor: 'var(--color-bg)' }}
                     >
-                      <StarIcon className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-accent-dark)' }} />
+                      <StarIcon className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--color-accent)' }} />
                       <p className="text-sm font-medium" style={{ color: 'var(--color-accent-dark)' }}>
                         {block.results}
                       </p>
@@ -165,42 +177,56 @@ function LaserProceduresContent() {
         </section>
       ))}
 
-      {/* Technology Section */}
+      {/* Technology — secondary-bg */}
       <section
-        className="py-16 px-4 sm:px-6 lg:px-8 text-center"
+        className="py-24 px-4 sm:px-6 lg:px-8 text-center"
         style={{ backgroundColor: 'var(--color-secondary-bg)' }}
       >
-        <div className="max-w-3xl mx-auto">
-          <span className="flex justify-center mb-4" style={{ color: 'var(--color-accent)' }}>
-            <MicroscopeIcon className="w-12 h-12" />
-          </span>
+        <div className="max-w-2xl mx-auto">
+          <div className="flex justify-center mb-5">
+            <div
+              className="w-16 h-16 rounded-full flex items-center justify-center"
+              style={{ backgroundColor: 'var(--color-white)', boxShadow: '0 4px 16px rgba(168,98,104,0.12)' }}
+            >
+              <MicroscopeIcon className="w-8 h-8" style={{ color: 'var(--color-accent-dark)' }} />
+            </div>
+          </div>
           <span
-            className="text-xs font-semibold uppercase tracking-widest"
+            className="inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4"
             style={{ color: 'var(--color-accent)' }}
           >
             {lp.techSubtitle}
           </span>
           <h2
-            className="text-2xl sm:text-3xl font-bold mt-2 mb-6"
-            style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)' }}
+            className="text-3xl sm:text-4xl font-bold mb-6"
+            style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)', lineHeight: '1.1' }}
           >
             {lp.techTitle}
           </h2>
+          <span className="section-divider mb-6 block" />
           <p className="text-base leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
             {lp.techDesc}
           </p>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-white)' }}>
-        <div className="max-w-4xl mx-auto">
-          <h2
-            className="text-2xl sm:text-3xl font-bold mb-8"
-            style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)' }}
-          >
-            {lp.faqTitle}
-          </h2>
+      {/* FAQ — white */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--color-white)' }}>
+        <div className="max-w-2xl mx-auto">
+          <div className="text-center mb-12">
+            <span
+              className="inline-block text-xs font-semibold uppercase tracking-[0.25em] mb-4"
+              style={{ color: 'var(--color-accent)' }}
+            >
+              {isRu ? 'Ответы на вопросы' : 'שאלות ותשובות'}
+            </span>
+            <h2
+              className="text-3xl sm:text-4xl font-bold"
+              style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)', lineHeight: '1.1' }}
+            >
+              {lp.faqTitle}
+            </h2>
+          </div>
           <FAQAccordion items={lp.faqItems} />
         </div>
       </section>
