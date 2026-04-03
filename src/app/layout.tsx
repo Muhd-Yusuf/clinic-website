@@ -5,6 +5,7 @@ import './globals.css';
 import Nav from '@/components/layout/Nav';
 import Footer from '@/components/layout/Footer';
 import WhatsAppFab from '@/components/ui/WhatsAppFab';
+import HtmlDirSetter from '@/components/layout/HtmlDirSetter';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -46,6 +47,9 @@ export default async function RootLayout({
       className={`${playfair.variable} ${inter.variable}`}
     >
       <body className="flex flex-col min-h-screen" style={{ fontFamily: 'var(--font-inter), system-ui, sans-serif' }}>
+        <Suspense fallback={null}>
+          <HtmlDirSetter />
+        </Suspense>
         <Suspense fallback={<div className="h-16 bg-white border-b" style={{ borderColor: 'var(--color-border)' }} />}>
           <Nav />
         </Suspense>
