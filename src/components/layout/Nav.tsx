@@ -1,6 +1,5 @@
 'use client';
-
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useLang } from '@/hooks/useLang';
@@ -13,197 +12,179 @@ export default function Nav() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const isRu = lang === 'ru';
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const fn = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', fn, { passive: true });
+    return () => window.removeEventListener('scroll', fn);
   }, []);
 
   const buildHref = useCallback(
-    (path: string) => {
-      if (isRu) {
-        return `${path}?lang=ru`;
-      }
-      return path;
-    },
+    (path: string) => (isRu ? `${path}?lang=ru` : path),
     [isRu]
   );
 
-  const switchLang = (newLang: 'he' | 'ru') => {
-    const params = new URLSearchParams(searchParams.toString());
-    if (newLang === 'ru') {
-      params.set('lang', 'ru');
-    } else {
-      params.delete('lang');
-    }
-    const query = params.toString();
-    router.replace(query ? `${pathname}?${query}` : pathname);
+  const switchLang = (l: 'he' | 'ru') => {
+    const p = new URLSearchParams(searchParams.toString());
+    l === 'ru' ? p.set('lang', 'ru') : p.delete('lang');
+    const q = p.toString();
+    router.replace(q ? `${pathname}?${q}` : pathname);
   };
 
-  const navLinks = [
-    { label: t.nav.home, href: buildHref('/') },
+  const links = [
     { label: t.nav.veinTreatments, href: buildHref('/vein-treatments') },
     { label: t.nav.beautyInjections, href: buildHref('/beauty-injections') },
     { label: t.nav.laserProcedures, href: buildHref('/laser-procedures') },
     { label: t.nav.about, href: buildHref('/about') },
     { label: t.nav.results, href: buildHref('/results') },
-    { label: t.nav.contact, href: buildHref('/contact') },
     { label: t.nav.faq, href: buildHref('/faq') },
   ];
 
   return (
     <>
-      {/* Luxury top bar */}
-      <div className="nav-top-bar" />
+      {/* Accent top strip */}
+      <div style={{ height: 3, backgroundColor: 'var(--color-accent)' }} />
 
       <nav
-        className="sticky top-0 z-50 bg-white"
+        className="sticky top-0 z-50 transition-all duration-500"
         style={{
-          borderBottom: '1px solid var(--color-border)',
-          boxShadow: scrolled ? '0 2px 16px 0 rgba(168,98,104,0.08)' : 'none',
-          transition: 'box-shadow 0.3s ease',
+          backgroundColor: scrolled ? 'rgba(250,247,247,0.95)' : 'var(--color-white)',
+          backdropFilter: scrolled ? 'blur(12px)' : 'none',
+          borderBottom: `1px solid ${scrolled ? 'var(--color-border)' : 'transparent'}`,
+          boxShadow: scrolled ? '0 2px 24px rgba(196,132,138,0.08)' : 'none',
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <div className="flex-shrink-0">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-20">
+          {/* Logo */}
+          <Link
+            href={buildHref('/')}
+            style={{
+              fontFamily: 'var(--font-playfair)',
+              fontSize: '1.35rem',
+              fontWeight: 700,
+              letterSpacing: '-0.01em',
+              color: 'var(--color-accent-dark)',
+            }}
+          >
+            {t.common.clinicName}
+          </Link>
+
+          {/* Desktop links */}
+          <div className="hidden lg:flex items-center gap-8">
+            {links.map((l) => (
               <Link
-                href={buildHref('/')}
-                className="text-2xl font-bold tracking-tight"
-                style={{
-                  fontFamily: 'var(--font-playfair)',
-                  color: 'var(--color-accent-dark)',
-                  letterSpacing: '0.02em',
-                }}
+                key={l.href}
+                href={l.href}
+                className="nav-link text-xs font-medium hover:text-[color:var(--color-accent)] transition-colors"
+                style={{ color: 'var(--color-text-secondary)', letterSpacing: '0.1em', textTransform: 'uppercase' }}
               >
-                {t.common.clinicName}
+                {l.label}
               </Link>
-            </div>
-
-            {/* Desktop nav links */}
-            <div className="hidden lg:flex items-center gap-7">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="nav-link text-sm font-medium pb-0.5"
-                  style={{ color: 'var(--color-text-secondary)' }}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-
-            {/* Right side: lang switcher + book CTA */}
-            <div className="hidden lg:flex items-center gap-4">
-              {/* Language switcher */}
-              <div className="flex items-center gap-1 text-xs font-semibold tracking-wider uppercase">
-                <button
-                  onClick={() => switchLang('he')}
-                  className="px-2.5 py-1 rounded-full transition-all"
-                  style={
-                    !isRu
-                      ? { backgroundColor: 'var(--color-accent)', color: 'white' }
-                      : { color: 'var(--color-text-secondary)' }
-                  }
-                >
-                  {t.nav.langSwitch.he}
-                </button>
-                <span style={{ color: 'var(--color-border)' }}>·</span>
-                <button
-                  onClick={() => switchLang('ru')}
-                  className="px-2.5 py-1 rounded-full transition-all"
-                  style={
-                    isRu
-                      ? { backgroundColor: 'var(--color-accent)', color: 'white' }
-                      : { color: 'var(--color-text-secondary)' }
-                  }
-                >
-                  {t.nav.langSwitch.ru}
-                </button>
-              </div>
-
-              {/* Book CTA — pill shape */}
-              <Link
-                href={buildHref('/contact')}
-                className="px-6 py-2.5 rounded-full text-sm font-semibold text-white transition-all hover:opacity-90 hover:shadow-md"
-                style={{ backgroundColor: 'var(--color-accent)' }}
-              >
-                {t.nav.bookCta}
-              </Link>
-            </div>
-
-            {/* Mobile hamburger */}
-            <button
-              className="lg:hidden p-2 rounded-md"
-              style={{ color: 'var(--color-text-primary)' }}
-              onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label="Toggle menu"
-            >
-              {mobileOpen ? (
-                <XMarkIcon className="h-6 w-6" />
-              ) : (
-                <Bars3Icon className="h-6 w-6" />
-              )}
-            </button>
+            ))}
           </div>
+
+          {/* Right: lang + CTA */}
+          <div className="hidden lg:flex items-center gap-6">
+            <div
+              className="flex items-center gap-1 text-xs tracking-widest"
+              style={{ color: 'var(--color-text-secondary)' }}
+            >
+              <button
+                onClick={() => switchLang('he')}
+                className="px-2 py-1 transition-colors"
+                style={!isRu ? { color: 'var(--color-accent)', fontWeight: 600 } : {}}
+              >
+                HE
+              </button>
+              <span style={{ color: 'var(--color-border)' }}>·</span>
+              <button
+                onClick={() => switchLang('ru')}
+                className="px-2 py-1 transition-colors"
+                style={isRu ? { color: 'var(--color-accent)', fontWeight: 600 } : {}}
+              >
+                RU
+              </button>
+            </div>
+            <Link
+              href={buildHref('/contact')}
+              className="text-xs font-semibold text-white px-6 py-3 transition-opacity hover:opacity-85"
+              style={{
+                backgroundColor: 'var(--color-accent)',
+                borderRadius: 2,
+                letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+              }}
+            >
+              {t.nav.bookCta}
+            </Link>
+          </div>
+
+          {/* Mobile hamburger */}
+          <button
+            className="lg:hidden p-2"
+            onClick={() => setOpen(!open)}
+            style={{ color: 'var(--color-text-primary)' }}
+            aria-label="Toggle menu"
+          >
+            {open ? <XMarkIcon className="w-6 h-6" /> : <Bars3Icon className="w-6 h-6" />}
+          </button>
         </div>
 
         {/* Mobile menu */}
-        {mobileOpen && (
+        {open && (
           <div
-            className="lg:hidden border-t"
+            className="lg:hidden border-t px-6 py-6 space-y-4"
             style={{ backgroundColor: 'var(--color-bg)', borderColor: 'var(--color-border)' }}
           >
-            <div className="px-4 py-5 space-y-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="block px-4 py-3 rounded-xl text-sm font-medium transition-all hover:text-[color:var(--color-accent)]"
-                  style={{ color: 'var(--color-text-secondary)' }}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <div className="pt-4 border-t flex items-center gap-3 flex-wrap" style={{ borderColor: 'var(--color-border)' }}>
-                <button
-                  onClick={() => { switchLang('he'); setMobileOpen(false); }}
-                  className="px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider"
-                  style={
-                    !isRu
-                      ? { backgroundColor: 'var(--color-accent)', color: 'white' }
-                      : { color: 'var(--color-text-secondary)', border: '1px solid var(--color-border)' }
-                  }
-                >
-                  HE
-                </button>
-                <button
-                  onClick={() => { switchLang('ru'); setMobileOpen(false); }}
-                  className="px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider"
-                  style={
-                    isRu
-                      ? { backgroundColor: 'var(--color-accent)', color: 'white' }
-                      : { color: 'var(--color-text-secondary)', border: '1px solid var(--color-border)' }
-                  }
-                >
-                  RU
-                </button>
-                <Link
-                  href={buildHref('/contact')}
-                  className="px-5 py-2 rounded-full text-sm font-semibold text-white"
-                  style={{ backgroundColor: 'var(--color-accent)' }}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {t.nav.bookCta}
-                </Link>
-              </div>
+            {links.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="block text-sm py-2"
+                style={{
+                  color: 'var(--color-text-secondary)',
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                {l.label}
+              </Link>
+            ))}
+            <div
+              className="flex items-center gap-4 pt-4 border-t"
+              style={{ borderColor: 'var(--color-border)' }}
+            >
+              <button
+                onClick={() => { switchLang('he'); setOpen(false); }}
+                className="text-xs tracking-widest"
+                style={!isRu ? { color: 'var(--color-accent)', fontWeight: 600 } : { color: 'var(--color-text-secondary)' }}
+              >
+                HE
+              </button>
+              <button
+                onClick={() => { switchLang('ru'); setOpen(false); }}
+                className="text-xs tracking-widest"
+                style={isRu ? { color: 'var(--color-accent)', fontWeight: 600 } : { color: 'var(--color-text-secondary)' }}
+              >
+                RU
+              </button>
+              <Link
+                href={buildHref('/contact')}
+                onClick={() => setOpen(false)}
+                className="text-xs font-semibold text-white px-5 py-2.5"
+                style={{
+                  backgroundColor: 'var(--color-accent)',
+                  borderRadius: 2,
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                {t.nav.bookCta}
+              </Link>
             </div>
           </div>
         )}

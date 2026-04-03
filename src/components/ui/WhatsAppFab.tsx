@@ -17,14 +17,17 @@ export default function WhatsAppFab() {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110"
+      className="wafab-pill fixed bottom-6 z-50"
       style={{
-        backgroundColor: '#25D366',
         [isRtl ? 'left' : 'right']: '1.5rem',
+        padding: '0.75rem 0.875rem',
       }}
       aria-label="WhatsApp"
     >
-      <WhatsAppIcon className="w-7 h-7 text-white" />
+      <WhatsAppIcon className="w-6 h-6 text-white flex-shrink-0" />
+      <span className="wafab-label text-white text-xs font-semibold tracking-wide">
+        WhatsApp
+      </span>
     </a>
   );
 }

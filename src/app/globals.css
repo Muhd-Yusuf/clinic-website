@@ -10,6 +10,7 @@
   --color-text-secondary: #6B6B6B;
   --color-white: #FFFFFF;
   --color-border: #E8DEDE;
+  --color-dark: #1C1410;
 }
 
 @theme inline {
@@ -24,9 +25,7 @@
   --color-border: var(--color-border);
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   background-color: var(--color-bg);
@@ -35,25 +34,38 @@ body {
   display: flex;
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ── Base transitions ── */
-a,
-button {
-  transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease;
+/* Hairline rule */
+.rule {
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: var(--color-accent);
+  margin-bottom: 1.5rem;
 }
 
-/* ── Section divider ── */
+/* Eyebrow label above headings */
+.eyebrow {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+
+/* Section divider (kept for backward compat) */
 .section-divider {
   display: block;
-  width: 80px;
+  width: 48px;
   height: 1px;
-  background-color: var(--color-accent-light);
+  background-color: var(--color-accent);
   margin: 0 auto;
 }
 
-/* ── Grain texture overlay ── */
+/* Grain texture overlay */
 .grain::after {
   content: '';
   position: absolute;
@@ -64,18 +76,13 @@ button {
   background-size: 200px 200px;
 }
 
-/* ── Luxury nav top bar ── */
-.nav-top-bar {
-  height: 8px;
-  background-color: var(--color-accent);
-  width: 100%;
-}
+/* Link hover underline */
+a, button { transition: color 0.25s ease, opacity 0.25s ease, transform 0.25s ease; }
 
-/* ── Animated underline for nav links ── */
+/* Nav animated underline */
 .nav-link {
   position: relative;
 }
-
 .nav-link::after {
   content: '';
   position: absolute;
@@ -88,16 +95,55 @@ button {
   transform-origin: center;
   transition: transform 0.3s ease;
 }
-
 .nav-link:hover::after {
   transform: scaleX(1);
 }
 
-/* ── Card hover utility ── */
-.card-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Marquee animation */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+/* Card hover utility */
+.card-hover {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
 .card-hover:hover {
-  transform: translateY(-4px);
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 8px 32px rgba(196,132,138,0.12);
+}
+
+/* WhatsApp FAB pill expand */
+.wafab-pill {
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  max-width: 3.5rem;
+  transition: max-width 0.4s ease, padding 0.4s ease;
+  border-radius: 9999px;
+  background-color: #25D366;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+}
+.wafab-pill:hover {
+  max-width: 12rem;
+}
+.wafab-label {
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 0;
+  opacity: 0;
+  transition: max-width 0.4s ease, opacity 0.35s ease 0.05s, margin 0.4s ease;
+  margin-inline-start: 0;
+}
+.wafab-pill:hover .wafab-label {
+  max-width: 8rem;
+  opacity: 1;
+  margin-inline-start: 0.5rem;
 }
