@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useLang } from '@/hooks/useLang';
 import { i18n } from '@/lib/i18n';
+import { CheckCircleIcon } from '@/components/ui/Icons';
 
 export default function ContactForm() {
   const lang = useLang();
@@ -46,10 +47,10 @@ export default function ContactForm() {
         style={{ borderColor: 'var(--color-accent-light)', backgroundColor: 'var(--color-secondary-bg)' }}
       >
         <div
-          className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl"
+          className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4"
           style={{ backgroundColor: 'var(--color-accent-light)' }}
         >
-          ✓
+          <CheckCircleIcon className="w-7 h-7" style={{ color: 'var(--color-accent-dark)' }} />
         </div>
         <p className="font-semibold text-base" style={{ color: 'var(--color-text-primary)' }}>
           {t.successMessage}

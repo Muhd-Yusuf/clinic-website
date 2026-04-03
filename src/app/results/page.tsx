@@ -6,6 +6,8 @@ import { i18n } from '@/lib/i18n';
 import SectionHero from '@/components/ui/SectionHero';
 import TestimonialCard from '@/components/ui/TestimonialCard';
 import CTABlock from '@/components/ui/CTABlock';
+import { ShieldIcon, CheckCircleIcon, ChatIcon, EyeIcon } from '@/components/ui/Icons';
+import React from 'react';
 
 function ResultsContent() {
   const lang = useLang();
@@ -14,23 +16,23 @@ function ResultsContent() {
   const isRu = lang === 'ru';
   const buildHref = (path: string) => (isRu ? `${path}?lang=ru` : path);
 
-  const galleryItems =
+  const galleryItems: { treatment: string; icon: React.ReactNode }[] =
     lang === 'he'
       ? [
-          { treatment: 'סקלרותרפיה', icon: '🦵' },
-          { treatment: 'בוטוקס', icon: '✨' },
-          { treatment: 'עיצוב שפתיים', icon: '💋' },
-          { treatment: 'לייזר לפיגמנטציה', icon: '☀️' },
-          { treatment: 'קונטור פנים', icon: '🎭' },
-          { treatment: 'ביוריביטליזציה', icon: '💧' },
+          { treatment: 'סקלרותרפיה', icon: <EyeIcon className="w-8 h-8" /> },
+          { treatment: 'בוטוקס', icon: <EyeIcon className="w-8 h-8" /> },
+          { treatment: 'עיצוב שפתיים', icon: <EyeIcon className="w-8 h-8" /> },
+          { treatment: 'לייזר לפיגמנטציה', icon: <EyeIcon className="w-8 h-8" /> },
+          { treatment: 'קונטור פנים', icon: <EyeIcon className="w-8 h-8" /> },
+          { treatment: 'ביוריביטליזציה', icon: <EyeIcon className="w-8 h-8" /> },
         ]
       : [
-          { treatment: 'Склеротерапия', icon: '🦵' },
-          { treatment: 'Ботокс', icon: '✨' },
-          { treatment: 'Коррекция губ', icon: '💋' },
-          { treatment: 'Лазер от пигментации', icon: '☀️' },
-          { treatment: 'Контур лица', icon: '🎭' },
-          { treatment: 'Биоревитализация', icon: '💧' },
+          { treatment: 'Склеротерапия', icon: <EyeIcon className="w-8 h-8" /> },
+          { treatment: 'Ботокс', icon: <EyeIcon className="w-8 h-8" /> },
+          { treatment: 'Коррекция губ', icon: <EyeIcon className="w-8 h-8" /> },
+          { treatment: 'Лазер от пигментации', icon: <EyeIcon className="w-8 h-8" /> },
+          { treatment: 'Контур лица', icon: <EyeIcon className="w-8 h-8" /> },
+          { treatment: 'Биоревитализация', icon: <EyeIcon className="w-8 h-8" /> },
         ];
 
   const testimonials =
@@ -81,14 +83,14 @@ function ResultsContent() {
                     className="flex flex-col items-center justify-center gap-2 text-sm font-medium"
                     style={{ backgroundColor: 'var(--color-secondary-bg)', color: 'var(--color-text-secondary)' }}
                   >
-                    <span className="text-3xl opacity-50">{item.icon}</span>
+                    <span className="opacity-50">{item.icon}</span>
                     <span>{res.beforeLabel}</span>
                   </div>
                   <div
                     className="flex flex-col items-center justify-center gap-2 text-sm font-medium"
                     style={{ backgroundColor: 'var(--color-accent-light)', color: 'var(--color-accent-dark)' }}
                   >
-                    <span className="text-3xl">{item.icon}</span>
+                    <span>{item.icon}</span>
                     <span>{res.afterLabel}</span>
                   </div>
                 </div>
@@ -154,12 +156,12 @@ function ResultsContent() {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
             {[
-              { icon: '🏅', text: res.trust1 },
-              { icon: '✅', text: res.trust2 },
-              { icon: '💬', text: res.trust3 },
+              { icon: <ShieldIcon className="w-10 h-10" />, text: res.trust1 },
+              { icon: <CheckCircleIcon className="w-10 h-10" />, text: res.trust2 },
+              { icon: <ChatIcon className="w-10 h-10" />, text: res.trust3 },
             ].map((item) => (
               <div key={item.text} className="flex flex-col items-center gap-3">
-                <span className="text-4xl">{item.icon}</span>
+                <span style={{ color: 'var(--color-accent)' }}>{item.icon}</span>
                 <p className="text-sm font-medium" style={{ color: 'var(--color-text-secondary)' }}>
                   {item.text}
                 </p>

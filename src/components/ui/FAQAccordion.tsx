@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { ChevronDownIcon } from '@/components/ui/Icons';
 
 interface FAQItem {
   question: string;
@@ -35,23 +36,16 @@ export default function FAQAccordion({ items }: FAQAccordionProps) {
               >
                 {item.question}
               </span>
-              <svg
-                className="w-5 h-5 flex-shrink-0 transition-transform duration-300"
+              <span
+                className="flex-shrink-0 transition-transform duration-300"
                 style={{
                   color: 'var(--color-accent)',
                   transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                  display: 'inline-flex',
                 }}
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
+                <ChevronDownIcon className="w-5 h-5" />
+              </span>
             </button>
 
             {/* Answer panel */}

@@ -6,6 +6,16 @@ import { i18n } from '@/lib/i18n';
 import SectionHero from '@/components/ui/SectionHero';
 import FAQAccordion from '@/components/ui/FAQAccordion';
 import CTABlock from '@/components/ui/CTABlock';
+import {
+  CheckCircleIcon,
+  HeartIcon,
+  SparkleIcon,
+  FlowerIcon,
+  MicroscopeIcon,
+  LeafIcon,
+  UserIcon,
+} from '@/components/ui/Icons';
+import React from 'react';
 
 function BeautyInjectionsContent() {
   const lang = useLang();
@@ -14,14 +24,14 @@ function BeautyInjectionsContent() {
   const isRu = lang === 'ru';
   const buildHref = (path: string) => (isRu ? `${path}?lang=ru` : path);
 
-  const treatments = [
-    { icon: '💋', title: bi.lipTitle, desc: bi.lipDesc, benefits: bi.lipBenefits },
-    { icon: '✨', title: bi.botoxTitle, desc: bi.botoxDesc, benefits: bi.botoxBenefits },
-    { icon: '🎭', title: bi.contourTitle, desc: bi.contourDesc, benefits: bi.contourBenefits },
-    { icon: '💆', title: bi.mesotherapyTitle, desc: bi.mesotherapyDesc, benefits: bi.mesotherapyBenefits },
-    { icon: '🌟', title: bi.radiessTitle, desc: bi.radiessDesc, benefits: bi.radiessBenefits },
-    { icon: '🔬', title: bi.polynucleotidesTitle, desc: bi.polynucleotidesDesc, benefits: bi.polynucleotidesBenefits },
-    { icon: '💧', title: bi.biorevitTitle, desc: bi.biorevitDesc, benefits: bi.biorevitBenefits },
+  const treatments: { icon: React.ReactNode; title: string; desc: string; benefits: string[] }[] = [
+    { icon: <HeartIcon className="w-8 h-8" />, title: bi.lipTitle, desc: bi.lipDesc, benefits: bi.lipBenefits },
+    { icon: <SparkleIcon className="w-8 h-8" />, title: bi.botoxTitle, desc: bi.botoxDesc, benefits: bi.botoxBenefits },
+    { icon: <FlowerIcon className="w-8 h-8" />, title: bi.contourTitle, desc: bi.contourDesc, benefits: bi.contourBenefits },
+    { icon: <UserIcon className="w-8 h-8" />, title: bi.mesotherapyTitle, desc: bi.mesotherapyDesc, benefits: bi.mesotherapyBenefits },
+    { icon: <SparkleIcon className="w-8 h-8" />, title: bi.radiessTitle, desc: bi.radiessDesc, benefits: bi.radiessBenefits },
+    { icon: <MicroscopeIcon className="w-8 h-8" />, title: bi.polynucleotidesTitle, desc: bi.polynucleotidesDesc, benefits: bi.polynucleotidesBenefits },
+    { icon: <LeafIcon className="w-8 h-8" />, title: bi.biorevitTitle, desc: bi.biorevitDesc, benefits: bi.biorevitBenefits },
   ];
 
   return (
@@ -54,7 +64,7 @@ function BeautyInjectionsContent() {
                 className="p-4 rounded-xl border text-center cursor-pointer transition-shadow hover:shadow-md"
                 style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-bg)' }}
               >
-                <span className="text-3xl block mb-2">{tr.icon}</span>
+                <span className="flex justify-center mb-2" style={{ color: 'var(--color-accent)' }}>{tr.icon}</span>
                 <p
                   className="text-sm font-semibold"
                   style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)' }}
@@ -81,7 +91,7 @@ function BeautyInjectionsContent() {
                 <>
                   <div>
                     <div className="flex items-center gap-3 mb-4">
-                      <span className="text-4xl">{tr.icon}</span>
+                      <span style={{ color: 'var(--color-accent)' }}>{tr.icon}</span>
                       <h2
                         className="text-2xl sm:text-3xl font-bold"
                         style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)' }}
@@ -95,35 +105,30 @@ function BeautyInjectionsContent() {
                     <ul className="space-y-2">
                       {tr.benefits.map((b) => (
                         <li key={b} className="flex items-center gap-2">
-                          <span
-                            className="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center text-white text-xs"
-                            style={{ backgroundColor: 'var(--color-accent)' }}
-                          >
-                            ✓
-                          </span>
+                          <CheckCircleIcon className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-accent)' }} />
                           <span className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>{b}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div
-                    className="h-64 rounded-2xl flex items-center justify-center text-5xl"
-                    style={{ backgroundColor: 'var(--color-accent-light)' }}
+                    className="h-64 rounded-2xl flex items-center justify-center"
+                    style={{ backgroundColor: 'var(--color-accent-light)', color: 'var(--color-accent-dark)' }}
                   >
-                    {tr.icon}
+                    <span className="w-20 h-20">{tr.icon}</span>
                   </div>
                 </>
               ) : (
                 <>
                   <div
-                    className="h-64 rounded-2xl flex items-center justify-center text-5xl"
-                    style={{ backgroundColor: 'var(--color-accent-light)' }}
+                    className="h-64 rounded-2xl flex items-center justify-center"
+                    style={{ backgroundColor: 'var(--color-accent-light)', color: 'var(--color-accent-dark)' }}
                   >
-                    {tr.icon}
+                    <span className="w-20 h-20">{tr.icon}</span>
                   </div>
                   <div>
                     <div className="flex items-center gap-3 mb-4">
-                      <span className="text-4xl">{tr.icon}</span>
+                      <span style={{ color: 'var(--color-accent)' }}>{tr.icon}</span>
                       <h2
                         className="text-2xl sm:text-3xl font-bold"
                         style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)' }}
@@ -137,12 +142,7 @@ function BeautyInjectionsContent() {
                     <ul className="space-y-2">
                       {tr.benefits.map((b) => (
                         <li key={b} className="flex items-center gap-2">
-                          <span
-                            className="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center text-white text-xs"
-                            style={{ backgroundColor: 'var(--color-accent)' }}
-                          >
-                            ✓
-                          </span>
+                          <CheckCircleIcon className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-accent)' }} />
                           <span className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>{b}</span>
                         </li>
                       ))}
@@ -198,12 +198,7 @@ function BeautyInjectionsContent() {
                 className="flex items-start gap-4 p-5 rounded-xl border"
                 style={{ borderColor: 'var(--color-border)' }}
               >
-                <span
-                  className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-white text-sm"
-                  style={{ backgroundColor: 'var(--color-accent)' }}
-                >
-                  ✓
-                </span>
+                <CheckCircleIcon className="w-6 h-6 flex-shrink-0 mt-0.5" style={{ color: 'var(--color-accent)' }} />
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>{s}</p>
               </div>
             ))}

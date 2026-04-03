@@ -1,7 +1,8 @@
 import Link from 'next/link';
+import React from 'react';
 
 interface ServiceCardProps {
-  icon: string;
+  icon: React.ReactNode;
   title: string;
   description: string;
   href: string;
@@ -22,10 +23,12 @@ export default function ServiceCard({
     >
       {/* Icon circle */}
       <div
-        className="w-14 h-14 rounded-full flex items-center justify-center text-2xl"
+        className="w-14 h-14 rounded-full flex items-center justify-center"
         style={{ backgroundColor: 'var(--color-accent-light)' }}
       >
-        {icon}
+        <span className="w-7 h-7" style={{ color: 'var(--color-accent-dark)' }}>
+          {icon}
+        </span>
       </div>
 
       {/* Title */}

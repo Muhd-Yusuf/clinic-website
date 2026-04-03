@@ -36,10 +36,3 @@ body {
   flex-direction: column;
 }
 
-[dir="rtl"] {
-  text-align: right;
-}
-
-[dir="ltr"] {
-  text-align: left;
-}

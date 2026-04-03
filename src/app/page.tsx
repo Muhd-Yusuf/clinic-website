@@ -7,6 +7,21 @@ import ServiceCard from '@/components/ui/ServiceCard';
 import TestimonialCard from '@/components/ui/TestimonialCard';
 import CTABlock from '@/components/ui/CTABlock';
 import Link from 'next/link';
+import {
+  ShieldIcon,
+  StarIcon,
+  LeafIcon,
+  SyringeIcon,
+  SparkleIcon,
+  AcademicCapIcon,
+  MicroscopeIcon,
+  HeartIcon,
+  FlowerIcon,
+  UserIcon,
+  CalendarIcon,
+  ChatIcon,
+  CheckCircleIcon,
+} from '@/components/ui/Icons';
 
 function HomeContent() {
   const lang = useLang();
@@ -68,12 +83,12 @@ function HomeContent() {
             {/* Trust badges */}
             <div className="flex flex-wrap gap-6">
               {[
-                { icon: '🏅', text: h.trustCertified },
-                { icon: '⭐', text: h.trustYears },
-                { icon: '✨', text: h.trustNatural },
+                { icon: <ShieldIcon className="w-5 h-5" />, text: h.trustCertified },
+                { icon: <StarIcon className="w-5 h-5" />, text: h.trustYears },
+                { icon: <LeafIcon className="w-5 h-5" />, text: h.trustNatural },
               ].map((badge) => (
                 <div key={badge.text} className="flex items-center gap-2">
-                  <span className="text-xl">{badge.icon}</span>
+                  <span style={{ color: 'var(--color-accent)' }}>{badge.icon}</span>
                   <span
                     className="text-sm font-medium"
                     style={{ color: 'var(--color-text-secondary)' }}
@@ -91,7 +106,9 @@ function HomeContent() {
             style={{ backgroundColor: 'var(--color-accent-light)' }}
           >
             <div>
-              <div className="text-5xl mb-4">💆‍♀️</div>
+              <div className="flex justify-center mb-4">
+                <UserIcon className="w-16 h-16" style={{ color: 'var(--color-accent-dark)' }} />
+              </div>
               <p
                 className="text-lg font-semibold"
                 style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-accent-dark)' }}
@@ -125,21 +142,21 @@ function HomeContent() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <ServiceCard
-              icon="🩺"
+              icon={<SyringeIcon className="w-7 h-7" />}
               title={t.nav.veinTreatments}
               description={t.veinTreatments.heroSubtitle}
               href={buildHref('/vein-treatments')}
               learnMoreLabel={t.common.learnMore}
             />
             <ServiceCard
-              icon="💉"
+              icon={<HeartIcon className="w-7 h-7" />}
               title={t.nav.beautyInjections}
               description={t.beautyInjections.heroSubtitle}
               href={buildHref('/beauty-injections')}
               learnMoreLabel={t.common.learnMore}
             />
             <ServiceCard
-              icon="⚡"
+              icon={<SparkleIcon className="w-7 h-7" />}
               title={t.nav.laserProcedures}
               description={t.laserProcedures.heroSubtitle}
               href={buildHref('/laser-procedures')}
@@ -168,17 +185,17 @@ function HomeContent() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: '🎓', title: h.whyUs1Title, desc: h.whyUs1Desc },
-              { icon: '🔬', title: h.whyUs2Title, desc: h.whyUs2Desc },
-              { icon: '🤝', title: h.whyUs3Title, desc: h.whyUs3Desc },
-              { icon: '🌸', title: h.whyUs4Title, desc: h.whyUs4Desc },
+              { icon: <AcademicCapIcon className="w-8 h-8" />, title: h.whyUs1Title, desc: h.whyUs1Desc },
+              { icon: <MicroscopeIcon className="w-8 h-8" />, title: h.whyUs2Title, desc: h.whyUs2Desc },
+              { icon: <HeartIcon className="w-8 h-8" />, title: h.whyUs3Title, desc: h.whyUs3Desc },
+              { icon: <FlowerIcon className="w-8 h-8" />, title: h.whyUs4Title, desc: h.whyUs4Desc },
             ].map((item) => (
               <div key={item.title} className="text-center">
                 <div
-                  className="w-16 h-16 rounded-full flex items-center justify-center text-3xl mx-auto mb-4"
+                  className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
                   style={{ backgroundColor: 'var(--color-accent-light)' }}
                 >
-                  {item.icon}
+                  <span className="w-8 h-8" style={{ color: 'var(--color-accent-dark)' }}>{item.icon}</span>
                 </div>
                 <h3
                   className="text-lg font-bold mb-2"
@@ -207,7 +224,10 @@ function HomeContent() {
             style={{ backgroundColor: 'var(--color-secondary-bg)' }}
           >
             <div className="text-center">
-              <div className="text-6xl mb-3">👩‍⚕️</div>
+              <div className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4"
+                style={{ backgroundColor: 'var(--color-accent-light)' }}>
+                <UserIcon className="w-12 h-12" style={{ color: 'var(--color-accent-dark)' }} />
+              </div>
               <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>
                 {t.about.heroTitle}
               </p>
@@ -324,16 +344,16 @@ function HomeContent() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
             {[
-              { step: '01', title: h.step1Title, desc: h.step1Desc, icon: '📅' },
-              { step: '02', title: h.step2Title, desc: h.step2Desc, icon: '💬' },
-              { step: '03', title: h.step3Title, desc: h.step3Desc, icon: '✅' },
+              { step: '01', title: h.step1Title, desc: h.step1Desc, icon: <CalendarIcon className="w-8 h-8" /> },
+              { step: '02', title: h.step2Title, desc: h.step2Desc, icon: <ChatIcon className="w-8 h-8" /> },
+              { step: '03', title: h.step3Title, desc: h.step3Desc, icon: <CheckCircleIcon className="w-8 h-8" /> },
             ].map((item) => (
               <div key={item.step} className="flex flex-col items-center">
                 <div
-                  className="w-20 h-20 rounded-full flex items-center justify-center text-3xl mb-4 relative"
+                  className="w-20 h-20 rounded-full flex items-center justify-center mb-4 relative"
                   style={{ backgroundColor: 'var(--color-secondary-bg)' }}
                 >
-                  {item.icon}
+                  <span style={{ color: 'var(--color-accent-dark)' }}>{item.icon}</span>
                   <span
                     className="absolute -top-1 -right-1 w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center text-white"
                     style={{ backgroundColor: 'var(--color-accent)' }}

@@ -6,6 +6,7 @@ import { i18n } from '@/lib/i18n';
 import SectionHero from '@/components/ui/SectionHero';
 import FAQAccordion from '@/components/ui/FAQAccordion';
 import CTABlock from '@/components/ui/CTABlock';
+import { CheckCircleIcon, SparkleIcon, SyringeIcon } from '@/components/ui/Icons';
 
 function VeinTreatmentsContent() {
   const lang = useLang();
@@ -15,12 +16,12 @@ function VeinTreatmentsContent() {
   const buildHref = (path: string) => (isRu ? `${path}?lang=ru` : path);
 
   const symptoms = [
-    { icon: '🔴', text: vt.symptom1 },
-    { icon: '🦵', text: vt.symptom2 },
-    { icon: '😣', text: vt.symptom3 },
-    { icon: '💧', text: vt.symptom4 },
-    { icon: '🌀', text: vt.symptom5 },
-    { icon: '🎨', text: vt.symptom6 },
+    { icon: <SyringeIcon className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-accent)' }} />, text: vt.symptom1 },
+    { icon: <SyringeIcon className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-accent)' }} />, text: vt.symptom2 },
+    { icon: <CheckCircleIcon className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-accent)' }} />, text: vt.symptom3 },
+    { icon: <CheckCircleIcon className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-accent)' }} />, text: vt.symptom4 },
+    { icon: <CheckCircleIcon className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-accent)' }} />, text: vt.symptom5 },
+    { icon: <CheckCircleIcon className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-accent)' }} />, text: vt.symptom6 },
   ];
 
   return (
@@ -53,7 +54,7 @@ function VeinTreatmentsContent() {
                 className="flex items-start gap-4 p-5 rounded-xl border"
                 style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-bg)' }}
               >
-                <span className="text-2xl mt-0.5">{s.icon}</span>
+                <span className="mt-0.5">{s.icon}</span>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
                   {s.text}
                 </p>
@@ -118,7 +119,7 @@ function VeinTreatmentsContent() {
               className="h-64 rounded-2xl flex items-center justify-center"
               style={{ backgroundColor: 'var(--color-accent-light)' }}
             >
-              <span className="text-5xl">⚡</span>
+              <SparkleIcon className="w-16 h-16" style={{ color: 'var(--color-accent-dark)' }} />
             </div>
             <div>
               <h2
@@ -133,10 +134,7 @@ function VeinTreatmentsContent() {
               <ul className="space-y-3">
                 {[vt.laserVesselBenefit1, vt.laserVesselBenefit2, vt.laserVesselBenefit3].map((b) => (
                   <li key={b} className="flex items-start gap-3">
-                    <span className="mt-0.5 w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center text-white text-xs"
-                      style={{ backgroundColor: 'var(--color-accent)' }}>
-                      ✓
-                    </span>
+                    <CheckCircleIcon className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--color-accent)' }} />
                     <span className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>{b}</span>
                   </li>
                 ))}
@@ -159,12 +157,7 @@ function VeinTreatmentsContent() {
           <ul className="space-y-3">
             {[vt.candidate1, vt.candidate2, vt.candidate3, vt.candidate4].map((c) => (
               <li key={c} className="flex items-start gap-3">
-                <span
-                  className="mt-0.5 w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center text-white text-xs"
-                  style={{ backgroundColor: 'var(--color-accent)' }}
-                >
-                  ✓
-                </span>
+                <CheckCircleIcon className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--color-accent)' }} />
                 <span className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>{c}</span>
               </li>
             ))}

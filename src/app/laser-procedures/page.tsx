@@ -6,6 +6,17 @@ import { i18n } from '@/lib/i18n';
 import SectionHero from '@/components/ui/SectionHero';
 import FAQAccordion from '@/components/ui/FAQAccordion';
 import CTABlock from '@/components/ui/CTABlock';
+import {
+  SparkleIcon,
+  StarIcon,
+  CheckCircleIcon,
+  FlowerIcon,
+  MicroscopeIcon,
+  EyeIcon,
+  LeafIcon,
+  ShieldIcon,
+} from '@/components/ui/Icons';
+import React from 'react';
 
 function LaserProceduresContent() {
   const lang = useLang();
@@ -14,22 +25,22 @@ function LaserProceduresContent() {
   const isRu = lang === 'ru';
   const buildHref = (path: string) => (isRu ? `${path}?lang=ru` : path);
 
-  const concerns = [
-    { icon: '🌹', text: lp.concern1 },
-    { icon: '🔹', text: lp.concern2 },
-    { icon: '☀️', text: lp.concern3 },
-    { icon: '🩸', text: lp.concern4 },
-    { icon: '🕐', text: lp.concern5 },
-    { icon: '🪞', text: lp.concern6 },
+  const concerns: { icon: React.ReactNode; text: string }[] = [
+    { icon: <FlowerIcon className="w-6 h-6" />, text: lp.concern1 },
+    { icon: <SparkleIcon className="w-6 h-6" />, text: lp.concern2 },
+    { icon: <LeafIcon className="w-6 h-6" />, text: lp.concern3 },
+    { icon: <CheckCircleIcon className="w-6 h-6" />, text: lp.concern4 },
+    { icon: <EyeIcon className="w-6 h-6" />, text: lp.concern5 },
+    { icon: <ShieldIcon className="w-6 h-6" />, text: lp.concern6 },
   ];
 
-  const treatmentBlocks = [
-    { icon: '🌹', title: lp.rosaceaTitle, desc: lp.rosaceaDesc, results: lp.rosaceaResults },
-    { icon: '🔹', title: lp.scarsTitle, desc: lp.scarsDesc, results: lp.scarsResults },
-    { icon: '☀️', title: lp.pigmentationTitle, desc: lp.pigmentationDesc, results: lp.pigmentationResults },
-    { icon: '🩸', title: lp.vesselTitle, desc: lp.vesselDesc, results: lp.vesselResults },
-    { icon: '✨', title: lp.rejuvTitle, desc: lp.rejuvDesc, results: lp.rejuvResults },
-    { icon: '💎', title: lp.erbiumTitle, desc: lp.erbiumDesc, results: lp.erbiumResults },
+  const treatmentBlocks: { icon: React.ReactNode; title: string; desc: string; results: string }[] = [
+    { icon: <FlowerIcon className="w-8 h-8" />, title: lp.rosaceaTitle, desc: lp.rosaceaDesc, results: lp.rosaceaResults },
+    { icon: <SparkleIcon className="w-8 h-8" />, title: lp.scarsTitle, desc: lp.scarsDesc, results: lp.scarsResults },
+    { icon: <LeafIcon className="w-8 h-8" />, title: lp.pigmentationTitle, desc: lp.pigmentationDesc, results: lp.pigmentationResults },
+    { icon: <CheckCircleIcon className="w-8 h-8" />, title: lp.vesselTitle, desc: lp.vesselDesc, results: lp.vesselResults },
+    { icon: <SparkleIcon className="w-8 h-8" />, title: lp.rejuvTitle, desc: lp.rejuvDesc, results: lp.rejuvResults },
+    { icon: <MicroscopeIcon className="w-8 h-8" />, title: lp.erbiumTitle, desc: lp.erbiumDesc, results: lp.erbiumResults },
   ];
 
   return (
@@ -62,7 +73,7 @@ function LaserProceduresContent() {
                 className="flex flex-col items-center p-4 rounded-xl border text-center"
                 style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-bg)' }}
               >
-                <span className="text-3xl mb-2">{c.icon}</span>
+                <span className="mb-2" style={{ color: 'var(--color-accent)' }}>{c.icon}</span>
                 <p
                   className="text-xs font-semibold"
                   style={{ color: 'var(--color-text-primary)' }}
@@ -88,7 +99,7 @@ function LaserProceduresContent() {
                 <>
                   <div>
                     <div className="flex items-center gap-3 mb-4">
-                      <span className="text-4xl">{block.icon}</span>
+                      <span style={{ color: 'var(--color-accent)' }}>{block.icon}</span>
                       <h2
                         className="text-2xl sm:text-3xl font-bold"
                         style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)' }}
@@ -103,30 +114,30 @@ function LaserProceduresContent() {
                       className="flex items-center gap-3 p-4 rounded-lg"
                       style={{ backgroundColor: 'var(--color-accent-light)' }}
                     >
-                      <span className="text-xl">⭐</span>
+                      <StarIcon className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-accent-dark)' }} />
                       <p className="text-sm font-medium" style={{ color: 'var(--color-accent-dark)' }}>
                         {block.results}
                       </p>
                     </div>
                   </div>
                   <div
-                    className="h-64 rounded-2xl flex items-center justify-center text-6xl"
-                    style={{ backgroundColor: 'var(--color-accent-light)' }}
+                    className="h-64 rounded-2xl flex items-center justify-center"
+                    style={{ backgroundColor: 'var(--color-accent-light)', color: 'var(--color-accent-dark)' }}
                   >
-                    {block.icon}
+                    <span className="w-20 h-20">{block.icon}</span>
                   </div>
                 </>
               ) : (
                 <>
                   <div
-                    className="h-64 rounded-2xl flex items-center justify-center text-6xl"
-                    style={{ backgroundColor: 'var(--color-accent-light)' }}
+                    className="h-64 rounded-2xl flex items-center justify-center"
+                    style={{ backgroundColor: 'var(--color-accent-light)', color: 'var(--color-accent-dark)' }}
                   >
-                    {block.icon}
+                    <span className="w-20 h-20">{block.icon}</span>
                   </div>
                   <div>
                     <div className="flex items-center gap-3 mb-4">
-                      <span className="text-4xl">{block.icon}</span>
+                      <span style={{ color: 'var(--color-accent)' }}>{block.icon}</span>
                       <h2
                         className="text-2xl sm:text-3xl font-bold"
                         style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)' }}
@@ -141,7 +152,7 @@ function LaserProceduresContent() {
                       className="flex items-center gap-3 p-4 rounded-lg"
                       style={{ backgroundColor: 'var(--color-accent-light)' }}
                     >
-                      <span className="text-xl">⭐</span>
+                      <StarIcon className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-accent-dark)' }} />
                       <p className="text-sm font-medium" style={{ color: 'var(--color-accent-dark)' }}>
                         {block.results}
                       </p>
@@ -160,7 +171,9 @@ function LaserProceduresContent() {
         style={{ backgroundColor: 'var(--color-secondary-bg)' }}
       >
         <div className="max-w-3xl mx-auto">
-          <span className="text-4xl block mb-4">🔬</span>
+          <span className="flex justify-center mb-4" style={{ color: 'var(--color-accent)' }}>
+            <MicroscopeIcon className="w-12 h-12" />
+          </span>
           <span
             className="text-xs font-semibold uppercase tracking-widest"
             style={{ color: 'var(--color-accent)' }}

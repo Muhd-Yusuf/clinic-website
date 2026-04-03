@@ -5,6 +5,7 @@ import { useLang } from '@/hooks/useLang';
 import { i18n } from '@/lib/i18n';
 import SectionHero from '@/components/ui/SectionHero';
 import CTABlock from '@/components/ui/CTABlock';
+import { UserIcon, AcademicCapIcon, FlowerIcon, ShieldIcon, MicroscopeIcon } from '@/components/ui/Icons';
 
 function AboutContent() {
   const lang = useLang();
@@ -22,9 +23,9 @@ function AboutContent() {
   ];
 
   const galleryItems = [
-    { label: ab.gallery1, icon: '🏥' },
-    { label: ab.gallery2, icon: '🔬' },
-    { label: ab.gallery3, icon: '🌸' },
+    { label: ab.gallery1, icon: <ShieldIcon className="w-12 h-12" /> },
+    { label: ab.gallery2, icon: <MicroscopeIcon className="w-12 h-12" /> },
+    { label: ab.gallery3, icon: <FlowerIcon className="w-12 h-12" /> },
   ];
 
   return (
@@ -44,7 +45,10 @@ function AboutContent() {
             className="w-full h-96 rounded-2xl flex flex-col items-center justify-center gap-4"
             style={{ backgroundColor: 'var(--color-secondary-bg)' }}
           >
-            <span className="text-7xl">👩‍⚕️</span>
+            <div className="w-28 h-28 rounded-full flex items-center justify-center"
+              style={{ backgroundColor: 'var(--color-accent-light)' }}>
+              <UserIcon className="w-16 h-16" style={{ color: 'var(--color-accent-dark)' }} />
+            </div>
             <p
               className="text-lg font-semibold"
               style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-accent-dark)' }}
@@ -88,12 +92,7 @@ function AboutContent() {
                 className="flex items-start gap-4 p-5 rounded-xl bg-white border"
                 style={{ borderColor: 'var(--color-border)' }}
               >
-                <span
-                  className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-white text-sm"
-                  style={{ backgroundColor: 'var(--color-accent)' }}
-                >
-                  🎓
-                </span>
+                <AcademicCapIcon className="w-6 h-6 flex-shrink-0 mt-0.5" style={{ color: 'var(--color-accent)' }} />
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
                   {cred}
                 </p>
@@ -109,7 +108,9 @@ function AboutContent() {
         style={{ backgroundColor: 'var(--color-white)' }}
       >
         <div className="max-w-3xl mx-auto">
-          <span className="text-5xl block mb-6">🌸</span>
+          <span className="flex justify-center mb-6" style={{ color: 'var(--color-accent)' }}>
+            <FlowerIcon className="w-14 h-14" />
+          </span>
           <h2
             className="text-2xl sm:text-3xl font-bold mb-6"
             style={{ fontFamily: 'var(--font-playfair)', color: 'var(--color-text-primary)' }}
@@ -141,7 +142,7 @@ function AboutContent() {
                 className="h-56 rounded-2xl flex flex-col items-center justify-center gap-3"
                 style={{ backgroundColor: 'var(--color-accent-light)' }}
               >
-                <span className="text-5xl">{item.icon}</span>
+                <span style={{ color: 'var(--color-accent-dark)' }}>{item.icon}</span>
                 <p
                   className="text-sm font-semibold"
                   style={{ color: 'var(--color-accent-dark)' }}
